@@ -12,6 +12,6 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v2
       - name: Generate AL Code
-        uses: joneug/mdal-action@v1
+        uses: joneug/mdal-action@master
         with:
           model-file: src/seminar-management.mdal

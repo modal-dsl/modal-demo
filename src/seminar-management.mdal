@@ -1,0 +1,132 @@
+solution "Seminar Management" {
+    Prefix = "SEM";
+
+    master "Seminar" {
+        ShortName = "Sem.";
+
+        fields {
+            field("Picture"; Media)
+            template("Description"; Description)
+            field("Duration Days"; Decimal)
+            field("Minimum Participants"; Integer)
+            field("Maximum Participants"; Integer)
+            field("Language Code"; Code[10]) {
+                //TableRelation = "Language";
+            }
+            field("Seminar Price"; Decimal)
+        }
+
+        cardPage {
+            group("General") {
+                field("Description")
+                field("Duration Days")
+            }
+        }
+
+        listPage {
+            field("Description")
+            field("Minimum Participants")
+            field("Maximum Participants")
+            field("Seminar Price")
+        }
+    }
+
+    supplemental "Instructor" {
+        ShortName = "Inst.";
+
+        fields {
+            template("Name"; Name)
+            template("Contact Information"; ContactInfo)
+            field("Contact No."; Code[20]) {
+                //TableRelation = "Contact";
+            }
+            field("Resource No."; Code[20]) {
+                //TableRelation = "Resource" where("Type" = const("Person"));
+            }
+            template("Salesperson"; Salesperson)
+            field("Internal/External"; Option[" ", "Internal", "External"])
+            field("Language Code"; Code[10]) {
+                //TableRelation = "Language";
+            }
+            template("Dimensions"; Dimensions)
+        }
+
+        listPage {
+            field("Contact Information")
+        }
+    }
+
+    supplemental "Seminar Room" {
+        ShortName = "Sem. Room";
+
+        fields {
+            template("Name"; Name)
+            template("Address"; Address)
+            template("Contact Information"; ContactInfo)
+            template("Salesperson"; Salesperson)
+            field("Resource No."; Code[20]) {
+                //TableRelation = "Resource" where("Type" = const("Machine"));
+            }
+            field("Internal/External"; Option[" ", "Internal", "External"])
+            field("Maximum Participants"; Integer)
+            template("Dimensions"; Dimensions)
+        }
+
+        listPage {
+            field("Address")
+            field("Internal/External")
+        }
+    }
+
+    document "Seminar Registration" {
+        ShortName = "Sem. Reg.";
+
+        header "Seminar Registration Header" {
+            ShortName = "Sem. Reg. Header";
+            StatusCaptions = ["Planning", "Registration", "Closed", "Canceled"];
+
+            fields {
+                field("Test"; BigInteger)
+                field("name2"; BigInteger)
+                include("name"; "Instructor"."Contact Information")
+                field("name22"; BigInteger)
+            }
+
+            documentPage {
+                group("General") {
+                    field("name")
+                }
+                group("Hello") {
+                    field("name22")
+                }
+            }
+        }
+
+        line "Seminar Registration Line" {
+            ShortName = "Sem. Reg. Line";
+
+            fields {
+                field("Test2"; Blob)
+                include("name"; "Seminar Registration Header"."No.")
+                template("Participant Contact No."; Contact)
+            }
+
+            listPartPage {
+                field("name")
+                field("Participant Contact No.")
+            }
+        }
+    }
+
+    ledgerEntry "Seminar Ledger Entry" {
+        ShortName = "Sem. Ledger Entry";
+
+        fields {
+            include("Duration Days"; "Seminar"."Duration Days")
+            include("Test"; "Seminar Registration Header"."Test")
+            include("Test2"; "Seminar Registration Line"."Test2")
+            include("Instructor Code"; "Instructor"."Code")
+            include("Participant Contact No."; "Seminar Registration Line"."Participant Contact No.")
+        }
+    }
+}

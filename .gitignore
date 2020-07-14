@@ -1,2 +1,5 @@
 # VS Code
 .vscode/
+
+# Generated AL files
+src-gen/

@@ -5,21 +5,32 @@ solution "Seminar Management" {
         ShortName = "Sem.";
 
         fields {
-            field("Picture"; Media)
             template("Description"; Description)
             field("Duration Days"; Decimal)
             field("Minimum Participants"; Integer)
             field("Maximum Participants"; Integer)
             field("Language Code"; Code[10]) {
-                //TableRelation = "Language";
+                TableRelation = "Language";
             }
             field("Seminar Price"; Decimal)
+            field("Gen. Prod. Posting Group"; Code[20]) {
+                TableRelation = "Gen. Product Posting Group";
+            }
+            template("Dimensions"; Dimensions)
         }
 
         cardPage {
             group("General") {
                 field("Description")
                 field("Duration Days")
+                field("Minimum Participants")
+                field("Maximum Participants")
+                field("Language Code")
+            }
+            group("Posting Details") {
+                field("Gen. Prod. Posting Group")
+                field("Seminar Price")
+                field("Dimensions")
             }
         }
 
@@ -28,6 +39,7 @@ solution "Seminar Management" {
             field("Minimum Participants")
             field("Maximum Participants")
             field("Seminar Price")
+            field("Language Code")
         }
     }
 
@@ -38,21 +50,25 @@ solution "Seminar Management" {
             template("Name"; Name)
             template("Contact Information"; ContactInfo)
             field("Contact No."; Code[20]) {
-                //TableRelation = "Contact";
+                TableRelation = "Contact";
             }
             field("Resource No."; Code[20]) {
-                //TableRelation = "Resource" where("Type" = const("Person"));
+                TableRelation = "Resource" where("Type" = const("Person"));
             }
-            template("Salesperson"; Salesperson)
             field("Internal/External"; Option[" ", "Internal", "External"])
+            template("Salesperson"; Salesperson)
             field("Language Code"; Code[10]) {
-                //TableRelation = "Language";
+                TableRelation = "Language";
             }
             template("Dimensions"; Dimensions)
         }
 
         listPage {
+            field("Internal/External")
             field("Contact Information")
+            field("Contact No.")
+            field("Resource No.")
+            field("Salesperson")
         }
     }
 
@@ -61,11 +77,11 @@ solution "Seminar Management" {
 
         fields {
             template("Name"; Name)
+            field("Contact Person"; Text[50])
             template("Address"; Address)
-            template("Contact Information"; ContactInfo)
             template("Salesperson"; Salesperson)
             field("Resource No."; Code[20]) {
-                //TableRelation = "Resource" where("Type" = const("Machine"));
+                TableRelation = "Resource" where("Type" = const("Machine"));
             }
             field("Internal/External"; Option[" ", "Internal", "External"])
             field("Maximum Participants"; Integer)
@@ -73,8 +89,12 @@ solution "Seminar Management" {
         }
 
         listPage {
-            field("Address")
             field("Internal/External")
+            field("Resource No.")
+            field("Maximum Participants")
+            field("Address")
+            field("Contact Person")
+            field("Salesperson")
         }
     }
 
@@ -86,19 +106,57 @@ solution "Seminar Management" {
             StatusCaptions = ["Planning", "Registration", "Closed", "Canceled"];
 
             fields {
-                field("Test"; BigInteger)
-                field("name2"; BigInteger)
-                include("name"; "Instructor"."Contact Information")
-                field("name22"; BigInteger)
+                field("Starting Date"; Date)
+                include("Seminar No."; "Seminar"."No.")
+                include("Seminar Description"; "Seminar"."Description")
+                include("Instructor Code"; "Instructor"."Code")
+                // TODO: Flow field "Instructor Name"
+                include("Duration Days"; "Seminar"."Duration Days")
+                include("Minimum Participants"; "Seminar"."Minimum Participants")
+                include("Maximum Participants"; "Seminar"."Maximum Participants")
+                include("Language Code"; "Seminar"."Language Code")
+                include("Seminar Price"; "Seminar"."Seminar Price")
+                include("Gen. Prod. Posting Group"; "Seminar"."Gen. Prod. Posting Group")
+                template("Salesperson"; Salesperson)
+                include("Room Code"; "Seminar Room"."Code")
+                include("Room Name"; "Seminar Room"."Name")
+                include("Room Address"; "Seminar Room"."Address")
+                include("Room Contact Person"; "Seminar Room"."Contact Person")
+                include("Dimensions"; "Seminar"."Dimensions")
+                // TODO: Flow field for No. of Participants
             }
 
             documentPage {
                 group("General") {
-                    field("name")
+                    field("Starting Date")
+                    field("Seminar No.")
+                    field("Seminar Description")
+                    field("Instructor Code")
+                    // TODO: Flow field "Instructor Name"
+                    field("Duration Days")
+                    field("Minimum Participants")
+                    field("Maximum Participants")
+                    field("Language Code")
+                    field("Salesperson")
                 }
-                group("Hello") {
-                    field("name22")
+                group("Seminar Room") {
+                    field("Room Code")
+                    field("Room Name")
+                    field("Room Contact Person")
+                    field("Room Address")
                 }
+                group("Invoicing") {
+                    field("Gen. Prod. Posting Group")
+                    field("Dimensions")
+                    field("Seminar Price")
+                }
+            }
+
+            listPage {
+                field("Starting Date")
+                field("Seminar Description")
+                field("Instructor Code")
+                field("Room Code")
             }
         }
 
@@ -106,14 +164,40 @@ solution "Seminar Management" {
             ShortName = "Sem. Reg. Line";
 
             fields {
-                field("Test2"; Blob)
-                include("name"; "Seminar Registration Header"."No.")
+                field("Bill-to Customer No."; Code[20]) {
+                    TableRelation = "Customer";
+                }
                 template("Participant Contact No."; Contact)
+                // TODO: Flowfield "Participant Name"
+                field("Registration Date"; Date)
+                field("To Invoice"; Boolean)
+                field("Participated"; Boolean)
+                field("Confirmation Date"; Date)
+                field("Seminar Price"; Decimal)
+                field("Line Discount %"; Decimal)
+                field("Line Discount Amount (LCY)"; Decimal)
+                field("Line Amount (LCY)"; Decimal)
+                field("Registered"; Boolean)
+                field("Gen. Bus. Posting Group"; Code[20])
+                field("External Document No."; Code[35])
+                template("Dimensions"; Dimensions)
             }
 
             listPartPage {
-                field("name")
+                field("Bill-to Customer No.")
                 field("Participant Contact No.")
+                // TODO: Flowfield "Participant Name"
+                field("Registration Date")
+                field("Registered")
+                field("Participated")
+                field("To Invoice")
+                field("Confirmation Date")
+                field("Seminar Price")
+                field("Line Discount %")
+                field("Line Discount Amount (LCY)")
+                field("Line Amount (LCY)")
+                field("External Document No.")
+                field("Dimensions")
             }
         }
     }
@@ -122,11 +206,22 @@ solution "Seminar Management" {
         ShortName = "Sem. Ledger Entry";
 
         fields {
-            include("Duration Days"; "Seminar"."Duration Days")
-            include("Test"; "Seminar Registration Header"."Test")
-            include("Test2"; "Seminar Registration Line"."Test2")
-            include("Instructor Code"; "Instructor"."Code")
+            field("Entry Type"; Enum["Registration"])
+            include("Bill-to Customer No."; "Seminar Registration Line"."Bill-to Customer No.")
+            field("Charge Type"; Enum["Instructor", "Room", "Participant"])
+            field("Quantity"; Decimal)
+            field("Unit Price"; Decimal)
+            field("Total Price"; Decimal)
             include("Participant Contact No."; "Seminar Registration Line"."Participant Contact No.")
+            field("Participant Name"; Text[50])
+            field("Chargeable"; Boolean)
+            include("Seminar Room Code"; "Seminar Room"."Code")
+            include("Instructor Code"; "Instructor"."Code")
+            include("Starting Date"; "Seminar Registration Header"."Starting Date")
+            field("Res. Ledger Entry No."; Integer) {
+                TableRelation = "Res. Ledger Entry";
+            }
+            field("Source Type"; Enum[" ", "Seminar Registration"])
         }
     }
 }

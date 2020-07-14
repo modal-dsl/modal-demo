@@ -9,3 +9,7 @@ This repository contains a demo project showcasing the features of [`mdAL`](http
 Try `mdAL` with this demo project inside the online IDE Gitpod:
 
 [![Edit with Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/joneug/mdal-demo)
+
+## License
+
+MIT (c) Jonathan Neugebauer

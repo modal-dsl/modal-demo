@@ -61,4 +61,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ env.APP_NAME }}
           asset_name: ${{ env.APP_NAME }}
-          asset_content_type: application/zip
+          asset_content_type: application/octet-stream

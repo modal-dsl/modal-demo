@@ -66,10 +66,12 @@ solution "Seminar Management" {
 
         listPage {
             field("Internal/External")
+            field("Name")
             field("Contact Information")
             field("Contact No.")
             field("Resource No.")
             field("Salesperson")
+            field("Language Code")
         }
     }
 
@@ -91,6 +93,7 @@ solution "Seminar Management" {
 
         listPage {
             field("Internal/External")
+            field("Name")
             field("Resource No.")
             field("Maximum Participants")
             field("Address")
@@ -220,6 +223,21 @@ solution "Seminar Management" {
                 TableRelation = "Res. Ledger Entry";
             }
             field("Source Type"; Enum[" ", "Seminar Registration"])
+        }
+
+        listPage {
+            field("Entry Type")
+            field("Participant Contact No.")
+            field("Participant Name")
+            field("Bill-to Customer No.")
+            field("Starting Date")
+            field("Quantity")
+            field("Unit Price")
+            field("Total Price")
+            field("Charge Type")
+            field("Chargeable")
+            field("Seminar Room Code")
+            field("Instructor Code")
         }
     }
 }

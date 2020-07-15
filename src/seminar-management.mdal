@@ -110,7 +110,6 @@ solution "Seminar Management" {
                 include("Seminar No."; "Seminar"."No.")
                 include("Seminar Description"; "Seminar"."Description")
                 include("Instructor Code"; "Instructor"."Code")
-                // TODO: Flow field "Instructor Name"
                 include("Duration Days"; "Seminar"."Duration Days")
                 include("Minimum Participants"; "Seminar"."Minimum Participants")
                 include("Maximum Participants"; "Seminar"."Maximum Participants")
@@ -123,7 +122,6 @@ solution "Seminar Management" {
                 include("Room Address"; "Seminar Room"."Address")
                 include("Room Contact Person"; "Seminar Room"."Contact Person")
                 include("Dimensions"; "Seminar"."Dimensions")
-                // TODO: Flow field for No. of Participants
             }
 
             documentPage {
@@ -132,7 +130,6 @@ solution "Seminar Management" {
                     field("Seminar No.")
                     field("Seminar Description")
                     field("Instructor Code")
-                    // TODO: Flow field "Instructor Name"
                     field("Duration Days")
                     field("Minimum Participants")
                     field("Maximum Participants")
@@ -168,7 +165,6 @@ solution "Seminar Management" {
                     TableRelation = "Customer";
                 }
                 template("Participant Contact No."; Contact)
-                // TODO: Flowfield "Participant Name"
                 field("Registration Date"; Date)
                 field("To Invoice"; Boolean)
                 field("Participated"; Boolean)
@@ -186,7 +182,6 @@ solution "Seminar Management" {
             listPartPage {
                 field("Bill-to Customer No.")
                 field("Participant Contact No.")
-                // TODO: Flowfield "Participant Name"
                 field("Registration Date")
                 field("Registered")
                 field("Participated")

@@ -77,8 +77,8 @@ solution "Seminar Management" {
 
         fields {
             template("Name"; Name)
-            field("Contact Person"; Text[50])
             template("Address"; Address)
+            template("Contact Information"; ContactInfo)
             template("Salesperson"; Salesperson)
             field("Resource No."; Code[20]) {
                 TableRelation = "Resource" where("Type" = const("Machine"));
@@ -93,7 +93,7 @@ solution "Seminar Management" {
             field("Resource No.")
             field("Maximum Participants")
             field("Address")
-            field("Contact Person")
+            field("Contact Information")
             field("Salesperson")
         }
     }
@@ -120,7 +120,7 @@ solution "Seminar Management" {
                 include("Room Code"; "Seminar Room"."Code")
                 include("Room Name"; "Seminar Room"."Name")
                 include("Room Address"; "Seminar Room"."Address")
-                include("Room Contact Person"; "Seminar Room"."Contact Person")
+                include("Room Contact Information"; "Seminar Room"."Contact Information")
                 include("Dimensions"; "Seminar"."Dimensions")
             }
 
@@ -139,7 +139,7 @@ solution "Seminar Management" {
                 group("Seminar Room") {
                     field("Room Code")
                     field("Room Name")
-                    field("Room Contact Person")
+                    field("Room Contact Information")
                     field("Room Address")
                 }
                 group("Invoicing") {

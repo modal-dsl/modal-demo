@@ -36,6 +36,7 @@ solution "Seminar Management" {
 
         listPage {
             field("Description")
+            field("Duration Days")
             field("Minimum Participants")
             field("Maximum Participants")
             field("Seminar Price")

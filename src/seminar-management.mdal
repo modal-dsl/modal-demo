@@ -114,7 +114,9 @@ solution "Seminar Management" {
                 include("Minimum Participants"; "Seminar"."Minimum Participants")
                 include("Maximum Participants"; "Seminar"."Maximum Participants")
                 include("Language Code"; "Seminar"."Language Code")
-                include("Seminar Price"; "Seminar"."Seminar Price")
+                include("Seminar Price"; "Seminar"."Seminar Price") {
+                    Validate = true;
+                }
                 include("Gen. Prod. Posting Group"; "Seminar"."Gen. Prod. Posting Group")
                 template("Salesperson"; Salesperson)
                 include("Room Code"; "Seminar Room"."Code")

@@ -8,7 +8,6 @@ jobs:
       run:
         shell: powershell
     env:
-      IMAGE_NAME: mcr.microsoft.com/businesscentral/sandbox:ltsc2019
       TEST_USERNAME: docker
       TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
       CONTAINER_NAME: tmp
@@ -20,7 +19,7 @@ jobs:
           Install-Module navcontainerhelper -Force
           Get-Command -Module navcontainerhelper | Out-Null
           New-NavContainer `
-            -imageName $env:IMAGE_NAME `
+            -artifactUrl (Get-BCArtifactUrl -type OnPrem -version 16.3 -country w1 -select Latest) `
             -containerName $env:CONTAINER_NAME `
             -accept_eula `
             -accept_outdated `

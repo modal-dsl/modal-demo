@@ -14,8 +14,9 @@ jobs:
       APP_NAME: seminar-management.app
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
-        bc-version: [16.0, 16.1, 16.2, 16.3]
+        bc-version: [16.1, 16.2, 16.3]
     steps:
       - name: Set up NAV Container
         run: |

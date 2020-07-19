@@ -4,6 +4,9 @@
 
 This repository contains a demo project showcasing the features of [`mdAL`](https://github.com/mdal-lang/mdal). `mdAL` is a Domain Specific Language that enables a Model-Driven approach to extension module development for the ERP System Microsoft Dynamics 365 Business Central. `mdAL` stands for **m**odel-**d**riven **AL**.
 
+| :exclamation:  Please note that `mdAL` currently is targeting Business Central 16 and later.   |
+|-----------------------------------------|
+
 ## Try now
 
 Try `mdAL` with this demo project inside the online IDE Gitpod. For more information on `mdAL` visit [mdal-lang.github.io](https://mdal-lang.github.io/#/).

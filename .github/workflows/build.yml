@@ -13,13 +13,17 @@ jobs:
       CONTAINER_NAME: tmp
       APP_NAME: seminar-management.app
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        bc-version: [16.1, 16.2, 16.3]
     steps:
       - name: Set up NAV Container
         run: |
           Install-Module navcontainerhelper -Force
           Get-Command -Module navcontainerhelper | Out-Null
           New-NavContainer `
-            -artifactUrl (Get-BCArtifactUrl -type OnPrem -version 16 -country w1 -select Latest) `
+            -artifactUrl (Get-BCArtifactUrl -type OnPrem -version ${{ matrix.bc-version }} -country w1 -select Latest) `
             -containerName $env:CONTAINER_NAME `
             -accept_eula `
             -accept_outdated `

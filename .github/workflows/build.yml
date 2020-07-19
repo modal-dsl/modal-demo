@@ -19,7 +19,7 @@ jobs:
           Install-Module navcontainerhelper -Force
           Get-Command -Module navcontainerhelper | Out-Null
           New-NavContainer `
-            -artifactUrl (Get-BCArtifactUrl -type OnPrem -version 16.3 -country w1 -select Latest) `
+            -artifactUrl (Get-BCArtifactUrl -type OnPrem -version 16 -country w1 -select Latest) `
             -containerName $env:CONTAINER_NAME `
             -accept_eula `
             -accept_outdated `

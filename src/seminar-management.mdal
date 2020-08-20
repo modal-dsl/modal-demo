@@ -50,9 +50,7 @@ solution "Seminar Management" {
         fields {
             template("Name"; Name)
             template("Contact Information"; ContactInfo)
-            field("Contact No."; Code[20]) {
-                TableRelation = "Contact";
-            }
+            template("Contact No."; Contact)
             field("Resource No."; Code[20]) {
                 TableRelation = "Resource" where("Type" = const("Person"));
             }
